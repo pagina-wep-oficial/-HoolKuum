@@ -2,12 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
   <title>Menú completo – HoolKuum</title>
   <meta name="description" content="Menú completo de HoolKuum en Hopelchén, Campeche. Todos los platillos, entradas, desayunos, mariscos, antojitos, birria y parrilladas." />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
     /* ===== ESTILOS ADICIONALES PARA CARRITO, MODAL Y CAROUSEL ===== */
+    body {
+      -webkit-text-size-adjust: 100%;
+    }
 
     /* Botones en tarjetas */
     .btn-add, .btn-view {
@@ -25,7 +28,7 @@
     }
     .btn-add {
       background: var(--orange);
-      color: #251006;
+      color: #251006; 
       box-shadow: 0 4px 12px rgba(242, 161, 40, 0.25);
     }
     .btn-add:hover {
@@ -499,7 +502,69 @@
       margin-bottom: 10px;
     }
 
-    /* Responsive */
+    /* ===== MEDIA QUERIES MEJORADAS PARA DPI ALTO ===== */
+    /* Breakpoint ampliado para tablets y móviles con DPI alto */
+    @media (max-width: 1024px) {
+      .nav-toggle {
+        display: block !important;
+        z-index: 60;
+        pointer-events: auto;
+      }
+      .nav-menu {
+        position: absolute;
+        top: 76px;
+        left: 4%;
+        right: 4%;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        background: #21110b;
+        border: 1px solid rgba(255,255,255,0.12);
+        border-radius: 22px;
+        padding: 18px;
+        z-index: 55;
+      }
+      .nav-menu.open {
+        display: flex;
+      }
+      .hero-grid,
+      .intro-panel,
+      .pizza-grid,
+      .location-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: 980px;
+      }
+      .hero-card {
+        max-width: 470px;
+      }
+      .feature-list,
+      .dish-grid,
+      .gallery-grid,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+      .dish-card.big {
+        grid-row: auto;
+      }
+      .menu-head,
+      .cta-panel,
+      .footer-grid {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .menu-card {
+        max-width: 100%;
+      }
+      .menu-items {
+        grid-template-columns: 1fr;
+      }
+      .full-menu-banner-text {
+        max-width: 80%;
+      }
+    }
+
     @media (max-width: 580px) {
       .cart-panel {
         width: 100%;
@@ -530,16 +595,61 @@
       .cart-total-row .total-amount {
         text-align: left;
       }
+
+      /* ===== AJUSTES MODAL DE CANTIDAD ===== */
       .modal-content {
-        padding: 24px 18px;
+        padding: 20px 16px;
+        max-width: 92vw;
+        width: 100%;
+      }
+      .modal-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 2px;
+      }
+      .modal-price {
+        font-size: 1rem;
+        margin-bottom: 16px;
+      }
+      .modal-quantity-section {
+        margin: 12px 0 8px;
+      }
+      .modal-quantity-section label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+      }
+      .modal-qty-control button {
+        width: 36px;
+        height: 36px;
+        font-size: 1.2rem;
       }
       .modal-qty-control input {
-        width: 60px;
+        width: 56px;
         font-size: 1.2rem;
+        padding: 6px 4px;
+      }
+      .modal-subtotal {
+        font-size: 1.1rem;
+        margin: 8px 0 12px;
+      }
+      .modal-note-section {
+        margin: 8px 0 14px;
+      }
+      .modal-note-section textarea {
+        padding: 10px 12px;
+        font-size: 0.9rem;
+        min-height: 50px;
       }
       .modal-actions {
         flex-direction: column;
+        gap: 8px;
+        margin-top: 12px;
       }
+      .modal-actions button {
+        padding: 12px;
+        font-size: 0.95rem;
+      }
+
+      /* ===== AJUSTES CAROUSEL ===== */
       .carousel-modal .modal-content {
         padding: 12px;
       }
@@ -550,8 +660,32 @@
       }
       .carousel-control.prev { left: 4px; }
       .carousel-control.next { right: 4px; }
+      .carousel-image {
+        max-height: 60vh;
+      }
+
+      /* ===== AJUSTES PARA BOTONES DEL CARRITO ===== */
+      .btn-cart-order,
+      .btn-cart-clear {
+        display: flex !important;
+        width: 100% !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+
+      /* ===== AJUSTE PARA BOTONES DE PLATILLO ===== */
+      .btn-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+      }
+      .btn-add,
+      .btn-view {
+        justify-content: center;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+      }
     }
-    .floating-whatsapp { z-index: 140; }
   </style>
 </head>
 <body>
@@ -937,9 +1071,6 @@
       const carouselNext = document.getElementById('carouselNext');
       const carouselIndicator = document.getElementById('carouselIndicator');
 
-      const navToggle = document.getElementById('navToggle');
-      const navMenu = document.getElementById('navMenu');
-
       // ---------- VARIABLES PARA EL MODAL ----------
       let modalItemData = null;
       // Variables para carousel
@@ -1159,6 +1290,7 @@
       function openCart() {
         cartPanel.classList.add('open');
         cartOverlay.classList.add('open');
+        // Si el menú hamburguesa está abierto, lo cerramos
         if (navMenu.classList.contains('open')) {
           navMenu.classList.remove('open');
           navToggle.setAttribute('aria-expanded', 'false');
@@ -1382,7 +1514,6 @@
           const seed = name.replace(/[^a-zA-Z0-9]/g, '');
           // Por ahora una sola imagen, pero dejamos la posibilidad de varias separadas por coma
           const imageUrls = [`https://picsum.photos/seed/${seed}/600/400`];
-          // Si en el futuro quieres añadir más, puedes hacer: `data-imagenes="url1,url2,url3"`
 
           // Crear contenedor de botones
           const actionsDiv = document.createElement('div');
@@ -1414,10 +1545,10 @@
             }, 800);
           });
 
-          // Botón "Ver platillo"
+          // Botón "Ver platillo" (corregido, sin espacio extra)
           const btnView = document.createElement('button');
           btnView.className = 'btn-view';
-          btnView.textContent = ' Ver platillo';
+          btnView.textContent = '👁️ Ver platillo';
           btnView.dataset.images = imageUrls.join(',');
           btnView.dataset.name = name;
 
@@ -1447,18 +1578,6 @@
       // ---------- INICIALIZACIÓN ----------
       loadCart();
       injectButtons();
-
-      navToggle?.addEventListener('click', () => {
-        const open = navMenu.classList.toggle('open');
-        navToggle.setAttribute('aria-expanded', String(open));
-        if (open && cartPanel.classList.contains('open')) {
-          closeCart();
-        }
-      });
-      navMenu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        navToggle.setAttribute('aria-expanded', 'false');
-      }));
 
       modalQtyInput.addEventListener('click', function(e) {
         e.stopPropagation();
