@@ -131,6 +131,9 @@
       flex-direction: column;
       padding: 24px 20px;
       border-radius: 28px 0 0 28px;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: right, transform;
     }
     .cart-panel.open { right: 0; }
     .cart-header {
@@ -237,10 +240,13 @@
       width: 100%;
       padding: 14px;
       font-size: 1rem;
-      display: flex;
+      display: flex !important;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      flex-shrink: 0;
+      opacity: 1 !important;
+      visibility: visible !important;
     }
     .btn-cart-clear {
       width: 100%;
