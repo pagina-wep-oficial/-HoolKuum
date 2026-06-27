@@ -153,7 +153,7 @@ a {
     letter-spacing: .16em;
     font-size: .78rem;
     font-weight: 950;
-    color: #ffd18b; /* color claro para hero */
+    color: #ffd18b;
 }
 .eyebrow.dark {
     display: inline-block;
@@ -1116,4 +1116,53 @@ h2 {
         margin:16px 0 16px 18px;
         font-size:1.5rem
     }
+}
+
+/* ===== FORZAR TEMA CLARO (MODO BLANCO) ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #fff7ec !important;
+    --paper: #fffdf8 !important;
+    --ink: #21110b !important;
+    --muted: #72655b !important;
+    --line: rgba(33, 17, 11, 0.12) !important;
+  }
+
+  body {
+    background: var(--bg) !important;
+    color: var(--ink) !important;
+  }
+
+  .topbar {
+    background: rgba(33, 17, 11, 0.86) !important;
+  }
+
+  .cart-panel {
+    background: var(--paper) !important;
+  }
+
+  .modal-content {
+    background: var(--paper) !important;
+  }
+
+  .menu-item-card {
+    background: var(--paper) !important;
+  }
+
+  .menu-preview-card {
+    background: #fffaf0 !important;
+  }
+
+  .full-menu {
+    background: var(--bg) !important;
+  }
+
+  .cart-floating-btn {
+    background: var(--orange) !important;
+    color: #251006 !important;
+  }
+  .cart-floating-btn:hover {
+    background: var(--red2) !important;
+    color: #fff !important;
+  }
 }

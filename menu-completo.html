@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <meta name="color-scheme" content="light only" />
   <title>Menú completo – HoolKuum</title>
   <meta name="description" content="Menú completo de HoolKuum en Hopelchén, Campeche. Todos los platillos, entradas, desayunos, mariscos, antojitos, birria y parrilladas." />
   <link rel="stylesheet" href="assets/css/styles.css" />
   <style>
-    /* ===== ESTILOS ADICIONALES PARA CARRITO, MODAL Y CAROUSEL ===== */
+    /* ===== ESTILOS ADICIONALES PARA CARRITO, MODAL, CAROUSEL Y TUTORIAL ===== */
     body {
       -webkit-text-size-adjust: 100%;
     }
@@ -503,7 +504,6 @@
     }
 
     /* ===== MEDIA QUERIES MEJORADAS PARA DPI ALTO ===== */
-    /* Breakpoint ampliado para tablets y móviles con DPI alto */
     @media (max-width: 1024px) {
       .nav-toggle {
         display: block !important;
@@ -596,7 +596,6 @@
         text-align: left;
       }
 
-      /* ===== AJUSTES MODAL DE CANTIDAD ===== */
       .modal-content {
         padding: 20px 16px;
         max-width: 92vw;
@@ -631,9 +630,6 @@
         font-size: 1.1rem;
         margin: 8px 0 12px;
       }
-      .modal-note-section {
-        margin: 8px 0 14px;
-      }
       .modal-note-section textarea {
         padding: 10px 12px;
         font-size: 0.9rem;
@@ -649,7 +645,6 @@
         font-size: 0.95rem;
       }
 
-      /* ===== AJUSTES CAROUSEL ===== */
       .carousel-modal .modal-content {
         padding: 12px;
       }
@@ -664,7 +659,6 @@
         max-height: 60vh;
       }
 
-      /* ===== AJUSTES PARA BOTONES DEL CARRITO ===== */
       .btn-cart-order,
       .btn-cart-clear {
         display: flex !important;
@@ -673,7 +667,6 @@
         opacity: 1 !important;
       }
 
-      /* ===== AJUSTE PARA BOTONES DE PLATILLO ===== */
       .btn-actions {
         flex-direction: column;
         align-items: stretch;
@@ -685,6 +678,183 @@
         padding: 8px 12px;
         font-size: 0.8rem;
       }
+    }
+
+    /* ===== TUTORIAL ===== */
+    .tutorial-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+    .tutorial-overlay.open { display: flex; }
+    .tutorial-card {
+      background: var(--paper);
+      border-radius: 32px;
+      max-width: 480px;
+      width: 100%;
+      padding: 32px 28px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+      position: relative;
+      animation: modalFade 0.3s ease;
+      text-align: center;
+    }
+    .tutorial-card .step-indicator {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.06em;
+    }
+    .tutorial-card h3 {
+      font-size: 1.6rem;
+      margin: 0 0 12px;
+      color: var(--ink);
+    }
+    .tutorial-card p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin: 0 0 24px;
+    }
+    .tutorial-card .tutorial-icon {
+      font-size: 3rem;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .tutorial-card .tutorial-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .tutorial-card .tutorial-actions button {
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-weight: 800;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+    .tutorial-card .btn-skip {
+      background: transparent;
+      color: var(--muted);
+      border: 2px solid var(--line);
+    }
+    .tutorial-card .btn-skip:hover {
+      background: var(--line);
+      color: var(--ink);
+    }
+    .tutorial-card .btn-next {
+      background: var(--orange);
+      color: #251006;
+      box-shadow: 0 8px 24px rgba(242, 161, 40, 0.3);
+    }
+    .tutorial-card .btn-next:hover {
+      background: var(--red2);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .tutorial-card .btn-done {
+      background: var(--red2);
+      color: #fff;
+      box-shadow: 0 8px 24px rgba(199, 71, 36, 0.3);
+    }
+    .tutorial-card .btn-done:hover {
+      background: var(--orange);
+      color: #251006;
+      transform: translateY(-2px);
+    }
+
+    /* ===== FORZAR TEMA CLARO (MODO BLANCO) ===== */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #fff7ec !important;
+        --paper: #fffdf8 !important;
+        --ink: #21110b !important;
+        --muted: #72655b !important;
+        --line: rgba(33, 17, 11, 0.12) !important;
+      }
+
+      body {
+        background: var(--bg) !important;
+        color: var(--ink) !important;
+      }
+
+      .topbar {
+        background: rgba(33, 17, 11, 0.86) !important;
+      }
+
+      .cart-panel {
+        background: var(--paper) !important;
+      }
+
+      .modal-content {
+        background: var(--paper) !important;
+      }
+
+      .menu-item-card {
+        background: var(--paper) !important;
+      }
+
+      .menu-preview-card {
+        background: #fffaf0 !important;
+      }
+
+      .full-menu {
+        background: var(--bg) !important;
+      }
+
+      .cart-floating-btn {
+        background: var(--orange) !important;
+        color: #251006 !important;
+      }
+      .cart-floating-btn:hover {
+        background: var(--red2) !important;
+        color: #fff !important;
+      }
+    }
+        /* ===== BOTONES FLOTANTES: WhatsApp + Ayuda ===== */
+    .floating-buttons {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 160;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .floating-buttons .floating-whatsapp {
+      position: static;
+      margin: 0;
+      z-index: auto;
+    }
+    .floating-help {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #251006;
+      font-size: 1.6rem;
+      font-weight: 800;
+      box-shadow: 0 8px 30px rgba(242, 161, 40, 0.4);
+      text-decoration: none;
+      transition: transform 0.2s;
+    }
+    .floating-help:hover {
+      transform: scale(1.05);
+      background: var(--red2);
+      color: #fff;
     }
   </style>
 </head>
@@ -698,9 +868,10 @@
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav-menu" id="navMenu" aria-label="Navegación">
-        <a href="index.html#menu">← Volver  a la Pagina principal</a>
+        <a href="index.html#menu">← Volver a la Pagina principal</a>
         <a href="index.html#ubicacion">Ubicación</a>
         <a class="mini-cta" href="https://wa.me/529982242576?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20HoolKuum" target="_blank" rel="noopener">WhatsApp</a>
+
       </nav>
     </div>
   </header>
@@ -709,15 +880,14 @@
     <div class="container full-menu-top">
       <a href="index.html#menu" class="back-link">← Volver a la Pagina principal</a>
       <div class="full-menu-head">
-        <p class="eyebrow dark">Menú completo</p>
+        <p class="eyebrow dark">Menú completo, Con pedidos a domicilio.</p>
         <p class="subhead">Todos los platillos de HoolKuum, en Hopelchén, Campeche.</p>
       </div>
       <div class="full-menu-banner">
         <img src="assets/img/comidas-para-llevar.jpg" alt="Platillos de HoolKuum listos para servir" />
         <div class="full-menu-banner-shade"></div>
         <div class="full-menu-banner-text">
-          <span>Cocina mexicana e italiana</span>
-
+          <span><h3>Cocina mexicana e italiana</h3></span>
         </div>
       </div>
     </div>
@@ -942,8 +1112,11 @@
     </div>
   </footer>
 
-  <!-- Botón flotante de WhatsApp -->
-  <a class="floating-whatsapp" href="https://wa.me/529982242576?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20HoolKuum" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+  <!-- Botones flotantes: WhatsApp y Ayuda -->
+  <div class="floating-buttons">
+    <a class="floating-whatsapp" href="https://wa.me/529982242576?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20HoolKuum" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+    <a href="#" id="tutorialTrigger" class="floating-help" aria-label="Ayuda">🎓</a>
+  </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
@@ -1023,6 +1196,20 @@
     </div>
   </div>
 
+  <!-- ===== TUTORIAL ===== -->
+  <div class="tutorial-overlay" id="tutorialOverlay">
+    <div class="tutorial-card">
+      <div class="step-indicator" id="tutorialStepIndicator">Paso 1 de 4</div>
+      <span class="tutorial-icon" id="tutorialIcon">👆</span>
+      <h3 id="tutorialTitle">¡Bienvenido!</h3>
+      <p id="tutorialText">Aquí te explicamos cómo hacer tu pedido fácilmente.</p>
+      <div class="tutorial-actions">
+        <button class="btn-skip" id="tutorialSkip">Saltar</button>
+        <button class="btn-next" id="tutorialNext">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
   <script src="assets/js/main.js"></script>
   <script>
     // ============================================================
@@ -1071,11 +1258,45 @@
       const carouselNext = document.getElementById('carouselNext');
       const carouselIndicator = document.getElementById('carouselIndicator');
 
+      // Tutorial
+      const tutorialOverlay = document.getElementById('tutorialOverlay');
+      const tutorialStepIndicator = document.getElementById('tutorialStepIndicator');
+      const tutorialIcon = document.getElementById('tutorialIcon');
+      const tutorialTitle = document.getElementById('tutorialTitle');
+      const tutorialText = document.getElementById('tutorialText');
+      const tutorialSkip = document.getElementById('tutorialSkip');
+      const tutorialNext = document.getElementById('tutorialNext');
+      const tutorialTrigger = document.getElementById('tutorialTrigger');
+
       // ---------- VARIABLES PARA EL MODAL ----------
       let modalItemData = null;
       // Variables para carousel
       let currentImages = [];
       let currentImageIndex = 0;
+      // Tutorial
+      let tutorialStep = 0;
+      const TUTORIAL_STEPS = [
+        {
+          icon: '👆',
+          title: 'Paso 1: Elige un platillo',
+          text: 'Busca tu platillo favorito y haz clic en el botón 🍽️ Ordenar que aparece en cada tarjeta.'
+        },
+        {
+          icon: '📝',
+          title: 'Paso 2: Personaliza tu pedido',
+          text: 'Selecciona la cantidad que deseas y escribe una nota (opcional). Luego presiona "Agregar al carrito".'
+        },
+        {
+          icon: '🛒',
+          title: 'Paso 3: Revisa tu carrito',
+          text: 'Haz clic en el botón "Ver pedido" (abajo-centro) para revisar tu selección. Puedes eliminar platios si lo deseas pulsando la X.'
+        },
+        {
+          icon: '📲',
+          title: 'Paso 4: Envía tu pedido',
+          text: 'Cuando estés listo, presiona "📲 Hacer pedido por WhatsApp". ¡Tu pedido se enviará automáticamente!'
+        }
+      ];
 
       // ---------- FUNCIONES DE CARRITO ----------
       function loadCart() {
@@ -1225,7 +1446,7 @@
       qty: qty,
       unit: getUnitLabel(item),
       price: isConsult ? '_Precio a consultar_' : `*$${((item.unitPrice || 0) * qty)}*`,
-      note: item.note && item.note.trim() ? item.note.trim() : null // 🔹 guardamos solo el texto
+      note: item.note && item.note.trim() ? item.note.trim() : null
     };
 
     if (isConsult) {
@@ -1242,7 +1463,6 @@
   function formatItem(item) {
     const unidadTexto = item.unit ? ` ${item.unit}` : '';
     const cantidadTexto = `– Cantidad: ${item.qty}${unidadTexto} –`;
-    // 🔹 Nota con formato de cita (>, negrita y cursiva)
     const noteLine = item.note ? `> *Nota:* _${item.note}_` : '';
     return `─────────────────────\n*${item.name}* ${cantidadTexto} ${item.price}\n${noteLine}`.trim();
   }
@@ -1291,7 +1511,6 @@
       function openCart() {
         cartPanel.classList.add('open');
         cartOverlay.classList.add('open');
-        // Si el menú hamburguesa está abierto, lo cerramos
         if (navMenu.classList.contains('open')) {
           navMenu.classList.remove('open');
           navToggle.setAttribute('aria-expanded', 'false');
@@ -1362,7 +1581,6 @@
         carouselTitle.textContent = title;
         updateCarousel();
         carouselModal.classList.add('open');
-        // Ocultar botones si solo hay una imagen
         if (images.length <= 1) {
           carouselPrev.style.display = 'none';
           carouselNext.style.display = 'none';
@@ -1395,6 +1613,44 @@
         if (currentImages.length <= 1) return;
         currentImageIndex = (currentImageIndex + 1) % currentImages.length;
         updateCarousel();
+      }
+
+      // ---------- TUTORIAL ----------
+      function showTutorial() {
+        tutorialStep = 0;
+        updateTutorialStep();
+        tutorialOverlay.classList.add('open');
+      }
+
+      function hideTutorial() {
+        tutorialOverlay.classList.remove('open');
+        // Guardar que ya se mostró
+        localStorage.setItem('hoolkuum_tutorial', 'done');
+      }
+
+      function updateTutorialStep() {
+        const step = TUTORIAL_STEPS[tutorialStep];
+        tutorialStepIndicator.textContent = `Paso ${tutorialStep + 1} de ${TUTORIAL_STEPS.length}`;
+        tutorialIcon.textContent = step.icon;
+        tutorialTitle.textContent = step.title;
+        tutorialText.textContent = step.text;
+        // Cambiar texto del botón Siguiente en el último paso
+        if (tutorialStep === TUTORIAL_STEPS.length - 1) {
+          tutorialNext.textContent = '✅ Entendido';
+          tutorialNext.className = 'btn-done';
+        } else {
+          tutorialNext.textContent = 'Siguiente →';
+          tutorialNext.className = 'btn-next';
+        }
+      }
+
+      function nextTutorialStep() {
+        if (tutorialStep < TUTORIAL_STEPS.length - 1) {
+          tutorialStep++;
+          updateTutorialStep();
+        } else {
+          hideTutorial();
+        }
       }
 
       // ---------- EVENTOS ----------
@@ -1453,14 +1709,12 @@
       carouselClose.addEventListener('click', closeCarousel);
       carouselPrev.addEventListener('click', prevImage);
       carouselNext.addEventListener('click', nextImage);
-      // Cerrar carousel con clic en overlay
       carouselModal.addEventListener('click', function(e) {
         if (e.target === carouselModal) {
           closeCarousel();
         }
       });
 
-      // Teclas: Escape cierra carousel, flechas navegan
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
           if (carouselModal.classList.contains('open')) {
@@ -1469,6 +1723,8 @@
             closeModal();
           } else if (cartPanel.classList.contains('open')) {
             closeCart();
+          } else if (tutorialOverlay.classList.contains('open')) {
+            hideTutorial();
           }
         }
         if (e.key === 'ArrowLeft' && carouselModal.classList.contains('open')) {
@@ -1511,12 +1767,9 @@
             if (match) unitPrice = parseFloat(match[0]);
           }
 
-          // Generar imágenes para carousel (usamos picsum con el nombre como semilla)
           const seed = name.replace(/[^a-zA-Z0-9]/g, '');
-          // Por ahora una sola imagen, pero dejamos la posibilidad de varias separadas por coma
           const imageUrls = [`https://picsum.photos/seed/${seed}/600/400`];
 
-          // Crear contenedor de botones
           const actionsDiv = document.createElement('div');
           actionsDiv.className = 'btn-actions';
 
@@ -1546,7 +1799,7 @@
             }, 800);
           });
 
-          // Botón "Ver platillo" (corregido, sin espacio extra)
+          // Botón "Ver platillo"
           const btnView = document.createElement('button');
           btnView.className = 'btn-view';
           btnView.textContent = ' Ver platillo';
@@ -1580,11 +1833,32 @@
       loadCart();
       injectButtons();
 
+      // Tutorial
+      const tutorialShown = localStorage.getItem('hoolkuum_tutorial');
+      if (!tutorialShown) {
+        // Mostrar después de un pequeño retraso para que la página cargue
+        setTimeout(showTutorial, 500);
+      }
+
+      // Botón para abrir el tutorial manualmente
+      tutorialTrigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (tutorialOverlay.classList.contains('open')) {
+          hideTutorial();
+        } else {
+          showTutorial();
+        }
+      });
+
+      // Eventos tutorial
+      tutorialSkip.addEventListener('click', hideTutorial);
+      tutorialNext.addEventListener('click', nextTutorialStep);
+
       modalQtyInput.addEventListener('click', function(e) {
         e.stopPropagation();
       });
 
-      console.log('🚀 Carrito HoolKuum con carousel activo.');
+      console.log('🚀 Carrito HoolKuum con carousel y tutorial activo.');
     })();
   </script>
 </body>
