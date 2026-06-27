@@ -698,7 +698,7 @@
       </a>
       <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
       <nav class="nav-menu" id="navMenu" aria-label="Navegación">
-        <a href="index.html#menu">Volver al menú</a>
+        <a href="index.html#menu">← Volver  a la Pagina principal</a>
         <a href="index.html#ubicacion">Ubicación</a>
         <a class="mini-cta" href="https://wa.me/529982242576?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20HoolKuum" target="_blank" rel="noopener">WhatsApp</a>
       </nav>
@@ -707,7 +707,7 @@
 
   <main class="full-menu" id="contenido">
     <div class="container full-menu-top">
-      <a href="index.html#menu" class="back-link">← Volver al menú resumido</a>
+      <a href="index.html#menu" class="back-link">← Volver a la Pagina principal</a>
       <div class="full-menu-head">
         <p class="eyebrow dark">Menú completo</p>
         <p class="subhead">Todos los platillos de HoolKuum, en Hopelchén, Campeche.</p>
@@ -717,7 +717,7 @@
         <div class="full-menu-banner-shade"></div>
         <div class="full-menu-banner-text">
           <span>Cocina mexicana e italiana</span>
-          <p>Entradas, desayunos, mariscos, antojitos, birria y parrilladas en un solo lugar.</p>
+
         </div>
       </div>
     </div>
@@ -1211,70 +1211,71 @@
       }
 
       function generateWhatsAppMessage() {
-        if (cart.length === 0) return null;
+  if (cart.length === 0) return null;
 
-        const sinPrecio = [];
-        const conPrecio = [];
+  const sinPrecio = [];
+  const conPrecio = [];
 
-        cart.forEach(item => {
-          const qty = item.quantity || 1;
-          const isConsult = item.priceType === 'consult' || item.price === 'Precio a consultar';
+  cart.forEach(item => {
+    const qty = item.quantity || 1;
+    const isConsult = item.priceType === 'consult' || item.price === 'Precio a consultar';
 
-          const itemData = {
-            name: item.name,
-            qty: qty,
-            unit: getUnitLabel(item),
-            price: isConsult ? '_Precio a consultar_' : `*$${((item.unitPrice || 0) * qty)}*`,
-            note: item.note && item.note.trim() ? `_Nota: ${item.note.trim()}_` : null
-          };
+    const itemData = {
+      name: item.name,
+      qty: qty,
+      unit: getUnitLabel(item),
+      price: isConsult ? '_Precio a consultar_' : `*$${((item.unitPrice || 0) * qty)}*`,
+      note: item.note && item.note.trim() ? item.note.trim() : null // 🔹 guardamos solo el texto
+    };
 
-          if (isConsult) {
-            sinPrecio.push(itemData);
-          } else {
-            conPrecio.push(itemData);
-          }
-        });
+    if (isConsult) {
+      sinPrecio.push(itemData);
+    } else {
+      conPrecio.push(itemData);
+    }
+  });
 
-        const lines = [];
-        lines.push('¡Hola!  Quiero hacer el siguiente pedido:');
-        lines.push('');
+  const lines = [];
+  lines.push('¡Hola!  Quiero hacer el siguiente pedido:');
+  lines.push('');
 
-        function formatItem(item) {
-          const unidadTexto = item.unit ? ` ${item.unit}` : '';
-          const cantidadTexto = `– Cantidad: ${item.qty}${unidadTexto} –`;
-          const noteLine = item.note ? `  ${item.note}` : '';
-          return `─────────────────────\n*${item.name}* ${cantidadTexto} ${item.price}\n${noteLine}`.trim();
-        }
+  function formatItem(item) {
+    const unidadTexto = item.unit ? ` ${item.unit}` : '';
+    const cantidadTexto = `– Cantidad: ${item.qty}${unidadTexto} –`;
+    // 🔹 Nota con formato de cita (>, negrita y cursiva)
+    const noteLine = item.note ? `> *Nota:* _${item.note}_` : '';
+    return `─────────────────────\n*${item.name}* ${cantidadTexto} ${item.price}\n${noteLine}`.trim();
+  }
 
-        sinPrecio.forEach(item => lines.push(formatItem(item)));
-        conPrecio.forEach(item => lines.push(formatItem(item)));
+  sinPrecio.forEach(item => lines.push(formatItem(item)));
+  conPrecio.forEach(item => lines.push(formatItem(item)));
 
-        lines.push('─────────────────────');
-        lines.push('');
+  lines.push('─────────────────────');
+  lines.push('');
 
-        let total = 0;
-        cart.forEach(item => {
-          if (item.priceType !== 'consult' && item.price !== 'Precio a consultar') {
-            const unit = item.unitPrice || 0;
-            const qty = item.quantity || 1;
-            total += unit * qty;
-          }
-        });
+  let total = 0;
+  cart.forEach(item => {
+    if (item.priceType !== 'consult' && item.price !== 'Precio a consultar') {
+      const unit = item.unitPrice || 0;
+      const qty = item.quantity || 1;
+      total += unit * qty;
+    }
+  });
 
-        const hasConsult = cart.some(item => 
-          item.priceType === 'consult' || item.price === 'Precio a consultar'
-        );
+  const hasConsult = cart.some(item => 
+    item.priceType === 'consult' || item.price === 'Precio a consultar'
+  );
 
-        lines.push(`> *Total:* *$${total}*`);
-        if (hasConsult) {
-          lines.push(`> _*El total no incluye platillos con precio a consultar.*_`);
-        }
+  lines.push(`> *Total:* *$${total}*`);
+  if (hasConsult) {
+    lines.push(`> _*El total no incluye platillos con precio a consultar.*_`);
+  }
 
-        lines.push('');
-        lines.push('¡Gracias!');
+  lines.push('');
+  lines.push('¡Gracias!');
 
-        return lines.join('\n');
-      }
+  return lines.join('\n');
+}
 
       function getUnitLabel(item) {
         if (item.priceType === 'unit') {
@@ -1548,7 +1549,7 @@
           // Botón "Ver platillo" (corregido, sin espacio extra)
           const btnView = document.createElement('button');
           btnView.className = 'btn-view';
-          btnView.textContent = '👁️ Ver platillo';
+          btnView.textContent = ' Ver platillo';
           btnView.dataset.images = imageUrls.join(',');
           btnView.dataset.name = name;
 

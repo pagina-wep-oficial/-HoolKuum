@@ -400,6 +400,30 @@ h2 {
     font-weight:900;
     color:#fff
 }
+
+/* ===== BOTÓN ORDENAR EN TARJETAS DESTACADAS ===== */
+.dish-card .btn-order {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 20px;
+  background: var(--orange);
+  color: #251006;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(242, 161, 40, 0.25);
+  text-decoration: none;
+}
+.dish-card .btn-order:hover {
+  transform: translateY(-2px);
+  background: var(--red2);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(199, 71, 36, 0.3);
+}
+
 /* ===== VISTA PREVIA DEL MENÚ (NUEVA) ===== */
 .menu-section {
     background:var(--ink);
